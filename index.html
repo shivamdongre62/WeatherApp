@@ -37,14 +37,23 @@
     </div>
 
     <script>
-        const apikey ="f4468b27770a71a73f352d6fcaf7036c";
-        const apiurl ="https://api.openweathermap.org/data/2.5/weather?units=metric&q=banglore";
+const apikey = "537ecdf9ee4c402281374422231308";
+const city = "indore";
+const apiurl = `https://api.weatherapi.com/v1/forecast.json?key=${apikey}&q=${city}&days=6&aqi=yes&alerts=yes`;
 
-        async function checkWeather(){
-            const response = await fetch(apiurl+`&appis={apikey}`);
-            var data = await response.json();
-            console.log(data);
-        }
+async function checkWeather() {
+    const response = await fetch(apiurl);
+    const data = await response.json();
+    console.log(data);
+
+    document.querySelector(".city").innerHTML = data.location.name;
+    document.querySelector(".temp").innerHTML = data.current.temp_c;
+    document.querySelector(".humidity").innerHTML = data.current.humidity;
+    document.querySelector(".wind").innerHTML = data.current.wind_kph;
+}
+
+checkWeather();
+
     </script>
 </body>
 </html>
